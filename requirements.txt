@@ -1,0 +1,8 @@
+pysqlite3==0.5.4
+pandas
+matplotlib
+huggingface_hub
+smolagents
+seaborn
+python-dotenv
+sqlalchemy
