@@ -1,0 +1,41 @@
+### Test SQL Query Endpoint
+PUT http://localhost:9000/ask
+Content-Type: application/json
+
+{
+    "query": "Show me total revenue for July 2017"
+}
+
+### Test Error Case
+PUT http://localhost:9000/ask
+Content-Type: application/json
+
+{
+    "query": "Invalid SQL Query"
+}
+
+### Test Health Check
+GET http://localhost:9000/health
+
+
+### Test Database Update
+POST http://localhost:9000/update
+Content-Type: application/json
+
+{
+    "data": [
+        {
+            "hotel": "Resort Hotel",
+            "is_canceled": 0,
+            "lead_time": 342,
+            "arrival_date_year": 2015
+        },
+        {
+            "hotel": "City Hotel",
+            "is_canceled": 1,
+            "lead_time": 737,
+            "arrival_date_year": 2015
+        }
+    ],
+    "table_name": "booking"
+}
