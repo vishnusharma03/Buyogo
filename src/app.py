@@ -6,7 +6,6 @@ from pydantic import BaseModel
 import logging
 import pandas as pd
 from typing import List, Dict, Any
-from embed import main
 
 from analytics.revenue import analyze_revenue_trends
 from analytics.cancellation import analyze_cancellation_rates
@@ -125,7 +124,7 @@ async def update_database(df_input: DataFrameInput):
         
         # Write to database using the imported function
         write_to_db(df, df_input.table_name, conn)
-        main(custom_df=df)
+        
         return {
             "status": "success",
             "message": f"Successfully updated table {df_input.table_name} with {len(df)} records"

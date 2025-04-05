@@ -1,5 +1,5 @@
 ### Test SQL Query Endpoint
-PUT http://localhost:9000/ask
+POST http://localhost:9000/ask
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### Test Error Case
-PUT http://localhost:9000/ask
+POST http://localhost:9000/ask
 Content-Type: application/json
 
 {
@@ -28,13 +28,21 @@ Content-Type: application/json
             "hotel": "Resort Hotel",
             "is_canceled": 0,
             "lead_time": 342,
-            "arrival_date_year": 2015
+            "arrival_date_year": 2015,
+            "arrival_date_month": "July",
+            "arrival_date_day_of_month": 15,
+            "stays_in_weekend_nights": 2,
+            "stays_in_week_nights": 3
         },
         {
             "hotel": "City Hotel",
             "is_canceled": 1,
             "lead_time": 737,
-            "arrival_date_year": 2015
+            "arrival_date_year": 2015,
+            "arrival_date_month": "July",
+            "arrival_date_day_of_month": 20,
+            "stays_in_weekend_nights": 1,
+            "stays_in_week_nights": 4
         }
     ],
     "table_name": "booking"

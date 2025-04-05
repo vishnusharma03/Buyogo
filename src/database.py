@@ -2,7 +2,7 @@ import sqlite3 as sql
 import pandas as pd
 from utils import create_db_engine
 
-data_path = "/app/data/hotel_bookings.csv"
+data_path = "./Data/hotel_bookings.csv"
 
 def read_csv(file_path: str):
     try:
