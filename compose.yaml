@@ -8,11 +8,12 @@ services:
       - "${PORT}:8000"
     expose:
       - "${PORT}"
-    volumes:
-      - ./Database:/app/Database
     env_file:
       - .env
-    command: uvicorn src.app:app --host 0.0.0.0 --port ${PORT} --reload
+    command: >
+      bash -c "mkdir -p /app/Database &&
+      cd /app && PYTHONPATH=/app python /app/src/database.py &&
+      uvicorn src.app:app --host 0.0.0.0 --port ${PORT} --reload"
     develop:
       watch:
         - action: rebuild

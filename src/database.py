@@ -31,4 +31,4 @@ def write_to_db(df: pd.DataFrame, table_name: str, conn: sql.Connection):
 df = read_csv(data_path)
 if df is not None:
     conn = create_db_engine()
-    write_to_db(df, "hotel_bookings", conn)
+    write_to_db(df, "booking", conn)

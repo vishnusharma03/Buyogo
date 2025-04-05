@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc libsqlite3-
     && pip install smolagents[litellm]
 
 COPY data/hotel_bookings.csv Data/
-COPY Database/hotel_database.db Database/
+# COPY Database/hotel_database.db Database/
 COPY src/ src/
 
 EXPOSE 8000
