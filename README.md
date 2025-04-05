@@ -35,18 +35,16 @@ Buyogo is a comprehensive hotel booking analytics system that combines tradition
 
 ```
 GEMINI_API_KEY=your_gemini_api_key
-GROQ_API_KEY=your_groq_api_key
-HUGGINGFACEHUB_API_KEY=your_huggingface_api_key
 ```
 
 ### Running with Docker
 
 ```bash
 # Build and start the containers
-docker-compose up -d
+docker compose up -d
 
 # Check logs
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ### Manual Installation
@@ -60,7 +58,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run the application
-uvicorn main:app --host 0.0.0.0 --port 9000 --reload
+uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## Usage
@@ -99,39 +97,36 @@ Available analysis types:
 ## Project Structure
 
 ```
-├── analytics/              # Analytics modules for different metrics
-│   ├── booking_lead.py     # Lead time distribution analysis
-│   ├── cancellation.py     # Cancellation rates analysis
-│   ├── geographical.py     # Geographical distribution analysis
-│   ├── revenue.py          # Revenue trends analysis
-│   └── satisfaction.py     # Customer satisfaction analysis
-├── chroma_db/              # ChromaDB persistence directory
 ├── data/                   # Data files
 │   └── hotel_bookings.csv  # Hotel bookings dataset
-├── agent_rag.py            # RAG implementation with CodeAgent
+├── src/                    # Source code directory
+│   ├── analytics/          # Analytics modules for different metrics
+│   │   ├── booking_lead.py # Lead time distribution analysis
+│   │   ├── cancellation.py # Cancellation rates analysis
+│   │   ├── geographical.py # Geographical distribution analysis
+│   │   ├── revenue.py      # Revenue trends analysis
+│   │   └── satisfaction.py # Customer satisfaction analysis
+│   ├── agent_rag.py        # RAG implementation with CodeAgent
+│   ├── app.py              # FastAPI application entry point
+│   ├── database.py         # Database setup and operations
+│   └── utils.py            # Utility functions
 ├── compose.yaml            # Docker Compose configuration
-├── config.yaml             # Application configuration
-├── database.py             # Database setup and operations
 ├── Dockerfile              # Docker image definition
 ├── embed.py                # Vector embedding functionality
-├── main.py                 # FastAPI application entry point
 ├── requirements.txt        # Python dependencies
-├── run.sh                  # Application startup script
-└── utils.py                # Utility functions
+└── README.md               # Project documentation
 ```
 
 ## Configuration
 
-The application can be configured through the `config.yaml` file. Key configuration options include:
+The application can be configured through environment variables and Docker Compose settings:
 
 - **HTTP Server Settings**:
-  - `port`: The port on which the server listens (default: 8000)
-  - `listen_address`: The address to bind to (default: "0.0.0.0")
-  - `max_payload_size_bytes`: Maximum allowed payload size (default: 41943040)
+  - Port: 8000 (configurable in compose.yaml)
+  - Host: 0.0.0.0
 
-- **ChromaDB Settings**:
-  - `persist_path`: Directory for ChromaDB persistence (default: "./chroma")
-  - `allow_reset`: Whether to allow database reset (default: false)
+- **Environment Variables** (set in .env file):
+  - `GEMINI_API_KEY`: Your Gemini AI API key
 
 ## Data Model
 
@@ -160,11 +155,12 @@ The system uses a hotel bookings dataset with the following key fields:
 The application is containerized using Docker. The `Dockerfile` sets up a Python environment with all necessary dependencies and configures the application for production use.
 
 Key Docker features:
-- Based on the ChromaDB official image
-- Includes all required Python packages
-- Configures environment variables
-- Sets up health checks
-- Exposes port 9000
+- Python-based container with FastAPI
+- Automatic code reloading in development
+- Health check monitoring
+- Environment variable configuration
+- Volume mounting for database persistence
+- Exposes port 8000
 
 ## License
 
