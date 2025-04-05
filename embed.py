@@ -1,8 +1,6 @@
 import os
 from tqdm import tqdm
 import pandas as pd
-import sqlite3 as sql
-from google import genai
 import chromadb as cdb
 from utils import load_api_keys, create_db_engine
 import chromadb.utils.embedding_functions as embedding_functions
@@ -197,7 +195,7 @@ def initialize_chroma_collection(api_key, collection_name="hotel_collection", pa
             model_name="models/text-embedding-004"
         )
         
-        client = cdb.PersistentClient(path=path)
+        client = cdb.PersistentClient(path=path, setting=cdb.config.Settings(chroma_config_path="/app/config.yaml"))
         
         if reset:
             try:
@@ -334,38 +332,7 @@ def main(batch_size=1000, start_batch=None, progress_file="upload_progress.txt",
         if engine:
             engine.dispose()
 
-if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Embed hotel booking data into ChromaDB')
-    parser.add_argument('--batch-size', type=int, default=1000, 
-                       help='Batch size for uploading documents')
-    parser.add_argument('--start-batch', type=int, default=None, 
-                       help='Batch to start from (overrides progress file)')
-    parser.add_argument('--progress-file', type=str, default='upload_progress.txt', 
-                       help='File to save/load progress')
-    parser.add_argument('--csv-file', type=str, help='Optional CSV file to use instead of database')
-    parser.add_argument('--reset', action='store_true', 
-                       help='Reset the collection before adding documents')
-    
-    args = parser.parse_args()
-    
-    custom_df = None
-    if args.csv_file:
-        try:
-            custom_df = pd.read_csv(args.csv_file)
-            logger.info(f"Loaded CSV file: {args.csv_file}")
-        except Exception as e:
-            logger.error(f"Error loading CSV file: {str(e)}")
-            raise
-    
-    main(
-        batch_size=args.batch_size,
-        start_batch=args.start_batch,
-        progress_file=args.progress_file,
-        custom_df=custom_df,
-        reset=args.reset
-    )
+
 
 
 

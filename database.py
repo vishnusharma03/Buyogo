@@ -2,7 +2,7 @@ import sqlite3 as sql
 import pandas as pd
 from utils import create_db_engine
 
-data_path = "./Data/hotel_bookings.csv"
+data_path = "/app/data/hotel_bookings.csv"
 
 def read_csv(file_path: str):
     try:
@@ -27,9 +27,8 @@ def write_to_db(df: pd.DataFrame, table_name: str, conn: sql.Connection):
         print(f"Error writing dataframe to database: {e}")
 
 
-if __name__ == "__main__":
-    df = read_csv(data_path)
-    if df is not None:
-        conn = create_db_engine()
-        write_to_db(df, "hotel_bookings", conn)
-        conn.close()
+
+df = read_csv(data_path)
+if df is not None:
+    conn = create_db_engine()
+    write_to_db(df, "hotel_bookings", conn)
