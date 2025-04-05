@@ -1,6 +1,6 @@
 import sqlite3 as sql
 import pandas as pd
-from utils import create_db_engine
+from src.utils import create_db_engine
 
 data_path = "./Data/hotel_bookings.csv"
 

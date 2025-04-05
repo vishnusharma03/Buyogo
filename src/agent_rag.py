@@ -1,5 +1,5 @@
 from smolagents import CodeAgent
-from utils import load_api_keys, create_db_engine
+from src.utils import load_api_keys, create_db_engine
 from smolagents import tool, LiteLLMModel
 from sqlalchemy import text
 

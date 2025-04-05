@@ -1,5 +1,5 @@
 ### Test SQL Query Endpoint
-POST http://localhost:9000/ask
+POST http://localhost:8000/ask
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### Test Error Case
-POST http://localhost:9000/ask
+POST http://localhost:8000/ask
 Content-Type: application/json
 
 {
@@ -15,11 +15,11 @@ Content-Type: application/json
 }
 
 ### Test Health Check
-GET http://localhost:9000/health
+GET http://localhost:8000/health
 
 
 ### Test Database Update
-POST http://localhost:9000/update
+POST http://localhost:8000/update
 Content-Type: application/json
 
 {

@@ -20,7 +20,7 @@ services:
         - action: rebuild
           path: compose.yaml
         - action: rebuild
-          path: src/main.py
+          path: src/app.py
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
