@@ -6,12 +6,7 @@ from pydantic import BaseModel
 import logging
 import pandas as pd
 from typing import List, Dict, Any
-
-from src.analytics.revenue import analyze_revenue_trends
-from src.analytics.cancellation import analyze_cancellation_rates
-from src.analytics.geographical import analyze_geographical_distribution
-from src.analytics.booking_lead import analyze_lead_time_distribution
-from src.analytics.satisfaction import analyze_customer_satisfaction
+from src.analytics import run_all_analytics
 
 
 # Set up logging
@@ -29,8 +24,6 @@ class DataFrameInput(BaseModel):
     data: List[Dict[Any, Any]]
     table_name: str = 'booking'
 
-class AnalyticsRequest(BaseModel):
-    analysis_type: str
 
 @router.post("/ask")
 async def execute_sql_query(query_request: QueryRequest):
@@ -54,38 +47,14 @@ async def execute_sql_query(query_request: QueryRequest):
         )
 
 
-@router.post("/analytics")
-async def get_analytics(request: AnalyticsRequest):
+@router.get("/analytics")
+async def get_analytics():
     try:
-        # Log the analytics request
-        logger.info(f"Processing analytics request: {request.analysis_type}")
-        
-        
-        # Map analysis_type to the appropriate function
-        analysis_functions = {
-            'revenue': analyze_revenue_trends,
-            'cancellation': analyze_cancellation_rates,
-            'geographical': analyze_geographical_distribution,
-            'booking_lead': analyze_lead_time_distribution,
-            'satisfaction': analyze_customer_satisfaction
-        }
-        
-        # Check if the requested analysis type exists
-        if request.analysis_type not in analysis_functions:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Invalid analysis type. Available types: {', '.join(analysis_functions.keys())}"
-            )
-        
         # Call the appropriate analysis function
-        image_base64, explanation = analysis_functions[request.analysis_type](params)
+        things =  run_all_analytics()
         
         # Return the analysis results
-        return {
-            "image": image_base64,
-            "explanation": explanation,
-            "analysis_type": request.analysis_type
-        }
+        return things
         
     except HTTPException:
         # Re-raise HTTP exceptions

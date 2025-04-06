@@ -7,9 +7,7 @@ def load_api_keys():
     """Load environment variables and return API keys."""
     load_dotenv()
     return {
-        "huggingface": os.getenv("HUGGINGFACEHUB_API_KEY"),
         "gemini": os.getenv("GEMINI_API_KEY"),
-        "groq": os.getenv("GROQ_API_KEY")
     }
 
 

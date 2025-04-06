@@ -1,10 +1,14 @@
 ### Test SQL Query Endpoint
-POST http://localhost:9000/ask
+POST http://localhost:8000/ask
 Content-Type: application/json
 
 {
     "query": "Show me total revenue for July 2017"
 }
+
+### Test Summary Endpoint
+GET http://localhost:8000/analytics
+
 
 ### Test Error Case
 POST http://localhost:8000/ask
@@ -15,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Test Health Check
-GET http://localhost:9000/health
+GET http://localhost:8000/health
 
 
 ### Test Database Update

@@ -2,10 +2,9 @@ import sqlite3 as sql
 import pandas as pd
 import sys
 import os
-# from utils import create_db_engine
+from src.utils import create_db_engine
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.utils import create_db_engine
-
 data_path = "./Data/hotel_bookings.csv"
 
 def read_csv(file_path: str):
@@ -35,4 +34,4 @@ def write_to_db(df: pd.DataFrame, table_name: str, conn: sql.Connection):
 df = read_csv(data_path)
 if df is not None:
     conn = create_db_engine()
-    write_to_db(df, "booking", conn)
+    write_to_db(df, "hotel_bookings", conn)
