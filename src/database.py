@@ -2,7 +2,7 @@ import sqlite3 as sql
 import pandas as pd
 import sys
 import os
-from src.utils import create_db_engine
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.utils import create_db_engine
 data_path = "./Data/hotel_bookings.csv"

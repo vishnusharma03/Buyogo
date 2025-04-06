@@ -22,7 +22,7 @@ class QueryRequest(BaseModel):
 
 class DataFrameInput(BaseModel):
     data: List[Dict[Any, Any]]
-    table_name: str = 'booking'
+    table_name: str = 'hotel_bookings'
 
 
 @router.post("/ask")

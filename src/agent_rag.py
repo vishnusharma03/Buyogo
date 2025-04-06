@@ -11,7 +11,7 @@ engine = create_db_engine()
 def sql_engine(query: str) -> str:
     """
     Allows you to perform SQL queries on the table. Returns a string representation of the result.
-    The table is named 'booking'. Its description is as follows:
+    The table is named 'hotel_bookings'. Its description is as follows:
         Columns:
         - index: INTEGER
         - hotel: TEXT
