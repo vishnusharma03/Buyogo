@@ -1,5 +1,13 @@
 # Buyogo - Hotel Booking Analytics System
 
+
+## Current Progress
+### ✅ Completed Improvements
+- Deloyed the container on AWS ECS
+
+### 🚀 Upcoming Improvements
+- Getting the frontend ready for project demonstration
+
 ## Overview
 
 Buyogo is a comprehensive hotel booking analytics system that combines traditional data analysis with modern RAG (Retrieval Augmented Generation) capabilities. The system allows users to query hotel booking data using natural language, generate various analytics reports, and visualize booking trends.
