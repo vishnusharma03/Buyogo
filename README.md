@@ -87,12 +87,7 @@ Content-Type: application/json
 #### Analytics Reports
 
 ```http
-POST /analytics
-Content-Type: application/json
-
-{
-  "analysis_type": "revenue"
-}
+GET /analytics
 ```
 
 Available analysis types:
@@ -108,19 +103,15 @@ Available analysis types:
 ├── data/                   # Data files
 │   └── hotel_bookings.csv  # Hotel bookings dataset
 ├── src/                    # Source code directory
-│   ├── analytics/          # Analytics modules for different metrics
-│   │   ├── booking_lead.py # Lead time distribution analysis
-│   │   ├── cancellation.py # Cancellation rates analysis
-│   │   ├── geographical.py # Geographical distribution analysis
-│   │   ├── revenue.py      # Revenue trends analysis
-│   │   └── satisfaction.py # Customer satisfaction analysis
 │   ├── agent_rag.py        # RAG implementation with CodeAgent
+│   ├── analytics.py        # Comprehensive analytics functionality
 │   ├── app.py              # FastAPI application entry point
 │   ├── database.py         # Database setup and operations
 │   └── utils.py            # Utility functions
 ├── compose.yaml            # Docker Compose configuration
 ├── Dockerfile              # Docker image definition
 ├── embed.py                # Vector embedding functionality
+├── data_prep.ipynb         # Data preparation notebook
 ├── requirements.txt        # Python dependencies
 └── README.md               # Project documentation
 ```
@@ -169,6 +160,24 @@ Key Docker features:
 - Environment variable configuration
 - Volume mounting for database persistence
 - Exposes port 8000
+
+## Implementation Challenges
+
+### Vector Embedding vs. Agentic-RAG Approach
+During development, we faced challenges with vector embeddings for structured hotel data:
+
+- **Structured Data Limitations**: Vector embeddings don't effectively preserve relationships in tabular data
+- **Query Precision**: Analytics requires exact matching that vector search can't reliably provide
+- **Performance Concerns**: Vector embeddings add unnecessary computational overhead
+
+Our solution implements an agentic-RAG system with SmoLAgents that:
+
+- Uses direct SQL integration for precise data retrieval
+- Provides natural language interface through CodeAgent
+- Generates contextual responses combining SQL results with LLM capabilities
+- Adapts easily to schema changes without reindexing
+
+This hybrid approach leverages both traditional database precision and modern LLM capabilities for an efficient analytics system.
 
 ## License
 
